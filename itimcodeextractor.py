@@ -311,19 +311,6 @@ class LdifParser:
                     else:
                         self.services[servicedn][4]+=1
             elif '---erObjectCategory'.lower() in entryObjectclass: # Operational workflows
-erpolicyitemname
-erpolicytarget
-erjavascript
-
-eridentitypolicy
-errecertificationpolicy
- 'erobjectprofile': 29,
- 'erorgunititem, organizationalunit': 760,
- 'ersystemrole': 47,
- 'ertemplate': 32,
- 'organizationalunit': 31}
-
-            elif '---erObjectCategory'.lower() in entryObjectclass: # Operational workflows
                 #ou=category,ou=itim,ou=PGE,dc=itim,dc=dom
                 #ou=objectProfile,ou=itim,ou=PGE,dc=itim,dc=dom
                 #ou=serviceProfile,ou=itim,ou=PGE,dc=itim,dc=dom - (objectclass=*)
