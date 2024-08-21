@@ -10,7 +10,11 @@ echo "<html><head><title>ITIM Workflow documentation - $timestamp</title></head>
 for i in *.xml ; do
 	echo "Processing $i..."
 	xsltproc -o "$i.dot" workflow2dot_graph.xslt "$i"
-	dot -Tsvg -o "$i.svg" "$i.dot"
+ 	#20240821 - The original had output to SVG, but it didn't come out correctly for larger workflows
+  	#           and I couldn't figure out where the bad data was coming from, so I switched it to PNG,
+	#           which works like a champ.
+	#dot -Tsvg -o "$i.svg" "$i.dot"
+ 	dot -Tpng -o "$i.png" "$i.dot"
 	nodecount=$(grep node "$i.dot" | wc -l)
 	widthlimit=$(($nodecount*100))
 #	if [[ $nodecount -lt 6 ]]; then
@@ -27,6 +31,8 @@ for i in *.xml ; do
 	fi
 	#${i:0:${#i}-24}
 	name=$(echo $i | sed s/_[0-9]*\.xml//)
-	echo "<p align=center><object data=\"$i.svg\" width="$widthlimit" type="image/svg+xml"></p><p align=center><b>$name</b></p>">>workflows_documentation.html
+ 	#20240821 - Another part of changing from SVG to PNG.
+	#echo "<p align=center><object data=\"$i.svg\" width="$widthlimit" type="image/svg+xml"></p><p align=center><b>$name</b></p>">>workflows_documentation.html
+ 	echo "<p align=center><object data=\"$i.png\" width="$widthlimit" type="image/png"></p><p align=center><b>$name</b></p>">>workflows_documentation.html
 done
 echo "</body></html>">>workflows_documentation.html
